@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Users &middot; v2scar{% endblock %}
+{% block content %}
+<h1>Users ({{ users | length }})</h1>
+<p style="color:var(--muted);margin:0 0 4px">Rows are rendered from <code>User.query.order_by(User.id).all()</code>.</p>
+
+<div class="card">
+  {% if users %}
+  <table>
+    <thead>
+      <tr><th>#</th><th>Username</th><th>UUID</th><th>Port</th><th>Used / total</th><th>Role</th><th>State</th></tr>
+    </thead>
+    <tbody>
+    {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td><code>{{ u.vmess_uuid[:8] }}&hellip;</code></td>
+        <td>{{ u.ss_port }}</td>
+        <td>{{ (u.used_traffic() / 1073741824) | round(2) }} / {{ (u.total_traffic / 1073741824) | round(0) | int }} GiB</td>
+        <td>{% if u.is_admin %}<span class="tag">admin</span>{% else %}<span class="tag">user</span>{% endif %}</td>
+        <td>{% if u.enable %}<span class="ok">enabled</span>{% else %}<span class="bad">disabled</span>{% endif %}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="margin:0;color:var(--muted)">No users yet.</p>
+  {% endif %}
+</div>
+
+<h2>JSON API</h2>
+<div class="card">
+  <div class="kv">
+    <b>POST /api/admin/users</b><span>header <code>X-API-Token: dev-api-token</code> &mdash; returns 401 without it</span>
+    <b>GET /api/admin/analytics</b><span>header <code>X-API-Token: dev-api-token</code> &mdash; returns 401 without it</span>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Log in &middot; v2scar{% endblock %}
+{% block content %}
+<h1>Log in</h1>
+<p style="color:var(--muted);margin:0 0 4px">Panel accounts are seeded from <code>seed.py</code>; the demo credentials below come from that seed.</p>
+
+<form class="card" method="post" action="{{ url_for('web.login') }}">
+  <label for="username">Username</label>
+  <input id="username" name="username" autocomplete="username" required>
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" autocomplete="current-password" required>
+  <button type="submit">Log in</button>
+</form>
+
+<h2>Seeded accounts</h2>
+<div class="card">
+  <div class="kv">
+    <b>admin</b><span>password <code>admin123</code> &mdash; <span class="tag">administrator</span></span>
+    <b>demo</b><span>password <code>demo123</code> &mdash; <span class="tag">user</span></span>
+  </div>
+</div>
+{% endblock %}

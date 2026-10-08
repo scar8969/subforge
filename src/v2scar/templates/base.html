@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}v2scar{% endblock %}</title>
+<style>
+  :root{
+    --bg:#0b0f14; --card:#121a22; --line:#1d2a35; --text:#e7eef5; --muted:#8ba0b3;
+    --brand:#5ee0c0; --brand2:#7aa2ff; --warn:#ffb020; --bad:#ff6b6b; --ok:#3ddc84;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font:15px/1.5 ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif}
+  header{display:flex;align-items:center;gap:18px;padding:14px 22px;
+         border-bottom:1px solid var(--line);background:#0d141b}
+  .logo{font-weight:700;letter-spacing:.4px;color:var(--brand)}
+  .logo span{color:var(--muted);font-weight:400}
+  nav{display:flex;gap:14px;margin-left:auto}
+  nav a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px}
+  nav a:hover{background:#16222c;color:var(--text)}
+  main{max-width:920px;margin:26px auto;padding:0 18px}
+  h1{font-size:22px;margin:0 0 6px}
+  h2{font-size:16px;margin:26px 0 10px;color:var(--muted);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        padding:16px 18px;margin:14px 0}
+  .kv{display:grid;grid-template-columns:170px 1fr;gap:6px 14px;font-size:14px}
+  .kv b{color:var(--muted);font-weight:500}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px}
+  pre{background:#0a1017;border:1px solid var(--line);border-radius:10px;
+      padding:12px;overflow:auto}
+  .tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;
+       border:1px solid var(--line);color:var(--muted)}
+  .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+  label{display:block;color:var(--muted);font-size:13px;margin:10px 0 4px}
+  input{width:100%;padding:9px 11px;border-radius:9px;border:1px solid var(--line);
+        background:#0a1017;color:var(--text)}
+  button{margin-top:14px;padding:9px 16px;border:0;border-radius:9px;font-weight:600;
+         background:var(--brand);color:#05231c;cursor:pointer}
+  .flash{padding:10px 12px;border-radius:9px;margin:12px 0;font-size:14px}
+  .flash.error{background:#2a1416;border:1px solid #f0555522;color:var(--bad)}
+  footer{max-width:920px;margin:30px auto 40px;padding:0 18px;color:var(--muted);font-size:13px}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">v2scar <span>panel</span></div>
+  <nav>
+    {% if session.get('user_id') %}
+      <a href="{{ url_for('web.index') }}">Dashboard</a>
+      <a href="{{ url_for('web.users') }}">Users</a>
+      <a href="{{ url_for('web.logout') }}">Log out</a>
+    {% else %}
+      <a href="{{ url_for('web.login') }}">Log in</a>
+    {% endif %}
+  </nav>
+</header>
+<main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer>
+  v2ray / shadowsocks subscription panel &middot;
+  subscription feed: <code>GET /api/subscribe?token=&lt;user id&gt;</code> &middot;
+  node sync: <code>POST /api/traffic</code> (header <code>X-API-Token</code>)
+</footer>
+</body>
+</html>
