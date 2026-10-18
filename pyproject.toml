@@ -3,13 +3,13 @@ requires = ["setuptools>=69", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "a11-v2scar"
+name = "subforge"
 version = "0.1.0"
-description = "A11 v2scar skeleton — v2ray panel. Reuses FluxGate sub generator."
+description = "v2ray subscription panel: users, nodes, subscription links and traffic accounting in one Flask service."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "project-skeletons maintainers" }]
+authors = [{ name = "Priyanshu Rout" }]
 keywords = ["flask", "service", "v2scar"]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -46,7 +46,7 @@ Documentation = "https://example.invalid/v2scar/docs"
 Issues = "https://example.invalid/v2scar/issues"
 
 [project.scripts]
-a11-v2scar = "v2scar.cli:main"
+subforge = "v2scar.cli:main"
 
 [tool.setuptools]
 package-dir = { "" = "src" }

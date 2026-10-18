@@ -1,4 +1,4 @@
-"""a11_v2scar — application factory.
+"""subforge — application factory.
 
 Templates live in the project-root templates/ directory (not panel/templates/),
 so the template folder is passed explicitly.  Flask(__name__) alone would look

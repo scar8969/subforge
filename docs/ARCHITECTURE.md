@@ -1,6 +1,6 @@
 # Architecture -- v2scar
 
-A11 v2scar skeleton — v2ray panel. Reuses FluxGate sub generator.
+A11 v2scar service — v2ray panel. Reuses FluxGate sub generator.
 
 This document explains how the service is put together, why the seams sit where
 they do, and what breaks first under load.
@@ -9,7 +9,7 @@ they do, and what breaks first under load.
 
 ## 1. Context
 
-a11_v2scar is a single-process Flask service. It owns its own database (SQLite by
+subforge is a single-process Flask service. It owns its own database (SQLite by
 default, any SQLAlchemy-supported backend via `DATABASE_URL`) and is deployed
 behind a reverse proxy or an orchestrator.
 
@@ -75,7 +75,7 @@ flowchart TB
 | `templates/base.html` | asset |
 | `templates/dashboard.html` | asset |
 | `templates/login.html` | asset |
-| `tests/test_a11_v2scar.py` | module |
+| `tests/test_subforge.py` | module |
 
 ---
 
@@ -137,9 +137,9 @@ writable lives under `/app`.
 
 | Table | Owner |
 | --- | --- |
-| `users` | owned by `a11_v2scar` |
-| `nodes` | owned by `a11_v2scar` |
-| `traffic_logs` | owned by `a11_v2scar` |
+| `users` | owned by `subforge` |
+| `nodes` | owned by `subforge` |
+| `traffic_logs` | owned by `subforge` |
 
 Tables are created by the application's own bootstrap on first use. No migration
 tool is wired in; the schema is additive, and the service tolerates a missing or

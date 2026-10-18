@@ -34,7 +34,7 @@ RUN groupadd --system --gid 1001 app \
 WORKDIR /app
 
 COPY --from=builder /wheels /wheels
-RUN python -m pip install --no-cache-dir --no-index --find-links=/wheels a11-v2scar \
+RUN python -m pip install --no-cache-dir --no-index --find-links=/wheels subforge \
  && rm -rf /wheels \
  && mkdir -p /var/lib/v2scar/instance /var/lib/v2scar/log \
  && chown -R app:app /var/lib/v2scar /app

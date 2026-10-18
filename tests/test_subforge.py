@@ -1,4 +1,4 @@
-"""A11 v2scar — tests. Run: pytest test_a11_v2scar.py"""
+"""A11 v2scar — tests. Run: pytest test_subforge.py"""
 import sys, os, base64, json
 
 import pytest
