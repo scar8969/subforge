@@ -38,7 +38,7 @@ def traffic():
     node = Node.query.get(d.get("node_id"))
     if not node:
         return jsonify({"error": "node not found"}), 404
-    node.last_seen = datetime.utcnow()
+    node.last_seen = datetime.datetime.now(datetime.UTC).replace(tzinfo=None)
     for u in d.get("users", []):
         user = User.query.get(u.get("id"))
         if not user:
