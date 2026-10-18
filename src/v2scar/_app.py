@@ -9,18 +9,21 @@ panel/api.py declares its own "/api/..." paths, so the blueprint is registered
 WITHOUT a url_prefix; adding one produced the broken double prefix /api/api/... .
 """
 
+from . import paths
 from .models import db
 from .panel.api import bp
 from .panel.web import web
 from .seed import seed
-from . import paths
 
 paths.ensure_runtime_dirs()
 
+
 def build_app():
     from flask import Flask
-    app = Flask(__name__, template_folder=str(paths.TEMPLATES_DIR),
-                instance_path=str(paths.INSTANCE_DIR))
+
+    app = Flask(
+        __name__, template_folder=str(paths.TEMPLATES_DIR), instance_path=str(paths.INSTANCE_DIR)
+    )
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + str(paths.INSTANCE_DIR / "v2scar.db")
     app.config["SECRET_KEY"] = "dev"
     app.config["API_TOKEN"] = "dev-api-token"
@@ -31,5 +34,6 @@ def build_app():
         db.create_all()
         seed()
     return app
+
 
 app = build_app()
