@@ -4,7 +4,7 @@ Every line below was produced by a command run against this exact checkout, on t
 
 | | |
 | --- | --- |
-| Generated | 2026-10-19 02:17 |
+| Generated | 2026-10-19 09:36 |
 | Python | 3.14.7 |
 | Platform | Windows 11 |
 
@@ -15,7 +15,7 @@ python -m pytest -q
 ```
 
 - exit code **0**
-- 21 passed in 1.52s
+- 21 passed in 1.53s
 
 ## Static gates
 
@@ -37,6 +37,21 @@ The application was imported through `wsgi.py` and each GET path declared in `op
 | 200 | `/api/health` | 36 | application/json |
 
 3 paths walked, 0 of them raised or answered 5xx.
+
+## CLI
+
+```
+usage: v2scar [-h] {users} ...
+
+v2ray / shadowsocks subscription panel
+
+positional arguments:
+  {users}
+    users     list users
+
+options:
+  -h, --help  show this help message and exit
+```
 
 ## Screenshots
 
