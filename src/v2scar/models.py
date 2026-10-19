@@ -1,8 +1,9 @@
 import hashlib
 import uuid
-from datetime import datetime
 
 from flask_sqlalchemy import SQLAlchemy
+
+from .clock import utcnow
 
 db = SQLAlchemy()
 GB = 1024**3
@@ -21,7 +22,7 @@ class User(db.Model):
     total_traffic = db.Column(db.BigInteger, default=20 * GB)
     enable = db.Column(db.Boolean, default=True)
     is_admin = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=utcnow)
 
     def set_password(self, raw):
         self.password_hash = _hash(raw, "v2scar")
@@ -84,7 +85,7 @@ class TrafficLog(db.Model):
     node_id = db.Column(db.Integer, index=True)
     upload = db.Column(db.BigInteger, default=0)
     download = db.Column(db.BigInteger, default=0)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=utcnow)
 
 
 def _hash(pw, salt):

@@ -124,7 +124,7 @@ Produced on this checkout by `pytest --cov` and by booting `wsgi.py` and issuing
 | --- | --- |
 | Tests | **21 / 21 passed** (4.1 s, exit 0) |
 | Line coverage | **71.0%** — 449 of 591 statements |
-| Source | 15 files / 1,345 lines |
+| Source | 15 files / 1,364 lines |
 | Test code | 4 files / 221 lines |
 | Documented paths | 5 in the spec, 3 GET |
 | Live probe | 12 GET requests to the booted app, **10 answered 200** |
@@ -162,7 +162,7 @@ subforge/
 │   ├── app.py                          120  Application factory for v2scar
 │   ├── errors.py                       108  Typed application errors and their HTTP mapping for 
 │   ├── panel/api.py                     95  
-│   ├── models.py                        92  
+│   ├── models.py                        93  
 │   ├── paths.py                         52  Filesystem layout for v2scar
 │   ├── panel/web.py                     43  
 │   ├── _app.py                          40  subforge — application factory
